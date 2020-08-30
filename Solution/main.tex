@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{ulem}
+% \usepackage[left=0.5in, right=0.5in, bottom=1in]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{190100044 \& 190100055}
+\rhead{CS 215: Assignment 1}
+\renewcommand{\footrulewidth}{1.0pt}
+\cfoot{Page \thepage}
+
+\title{Assignment 1: CS 215}
+\author{190100044 \& 190100055}
+\date{31st August 2020}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage \setcounter{page}{1}
+\section{Question 1}
+
+\newpage
+\section{Question 2}
+By the definition of the variance\footnote{Note: Here $\sigma$ is defined to be the \textbf{positive} square root of the variance}, $\sigma^2$, we have:
+$$ \sigma^2 = \frac{\sum_{i=1}^n (x_i - \mu)^2}{n-1} $$
+\begin{equation}
+    \label{var}
+    (n-1)\sigma^2 = \sum_{i=1}^n (x_i - \mu)^2
+\end{equation}
+Since $(x_i - \mu)^2 \ge 0 \  \forall \ i$, we have ((for all $i$)):
+$$ \sum_{i=1}^n (x_i - \mu)^2 \ge (x_i - \mu)^2  $$
+Thus, by (\ref{var}) we get (for all $i$):
+$$ (n-1)\sigma^2 \ge (x_i - \mu)^2 $$
+Taking the square root on both sides,
+$$ \sigma\sqrt{n-1} \ge |x_i - \mu| \Rightarrow |x_i - \mu| \le \sigma\sqrt{n-1} \hfill $$
+\hfill \qedsymbol \\
+\noindent
+The (Two-sided) Chebyshev's inequality states that:
+$$ |S_k| = \{ x_i : \  |x_i - \mu| \ge k\sigma \} $$
+\begin{equation}
+    \frac{|S_k|}{n} < \frac{1}{k^2}
+\end{equation}
+``TODO: How does this inequality compare with Chebyshev's inequality as n increases?"
+
+\newpage
+\section{Question 3}
+
+\newpage
+\section{Question 4}
+Let $A$ be the event that the rickshaw is red.\\
+Thus, as a given rickshaw must be either red or blue, $A^c$ is the event that the rickshaw is blue.\\
+Let $B$ be the event that the rickshaw is observed as red by the person under the given conditions.\\
+We have been given the following:
+$$ 
+    P(A) = \frac{1}{100} \Rightarrow P(A^c) = \frac{99}{100}
+$$
+$$
+    P(B|A) = 0.99 \ \  P(B|A^c) = 0.02
+$$
+We need to find $P(A|B)$. \\
+\\
+We shall first find $P(B)$,
+$$
+\begin{aligned}
+    P(B) &= P(B|A)P(A) + P(B|A^c)P(A^c)\\
+    &= 0.99\times0.01 + 0.02\times0.99\\
+    &= 0.0297
+\end{aligned}
+$$
+\\
+Now, by Bayes Theorem,
+$$
+\begin{aligned}
+    P(A|B) &= \frac{P(B|A)P(A)}{P(B)}\\
+    &= \frac{0.99\times0.01}{0.0297}\\
+    &= \frac{1}{3} = 0.33 = 33\%
+\end{aligned}
+$$
+Thus, the defence lawyer can argue that there was only a $33\%$ chance that the rickshaw observed by the person XYZ was indeed red.
+
+\newpage
+\section{Question 5}
+
+\newpage
+\section{Question 6}
+
+\newpage
+\section{Question 7}
+
+\end{document}
