@@ -9,9 +9,11 @@
 \usepackage[left=0.75in, right=0.75in, bottom=0.75in]{geometry}
 \usepackage{graphicx}
 \usepackage{float}
+
 \usepackage{chngcntr}
 \counterwithin*{equation}{section}
 \counterwithin*{equation}{subsection}
+
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -103,33 +105,45 @@ The inequality proven earlier also says that $\forall i \ |x_i - \mu| \le \sigma
 \section*{Question 3}
 \addcontentsline{toc}{section}{Question 3}
 We have,
-$$ 
-    \mu = \frac{\sum_{i=1}^n x_i}{n}
-$$
-$$
-    \mu - \tau = \frac{\sum_{i=1}^n x_i}{n} - \tau = \frac{(\sum_{i=1}^nx_i) - n\tau}{n} = \frac{\sum_{i=1}^n (x_i - \tau)}{n}
-$$
+\begin{equation*}
+    \begin{split}
+        \mu &= \frac{\sum_{i=1}^n x_i}{n} \\
+        \mu - \tau &= \frac{\sum_{i=1}^n x_i}{n} - \tau \\
+            &= \frac{(\sum_{i=1}^nx_i) - n\tau}{n} \\
+            &= \frac{\sum_{i=1}^n (x_i - \tau)}{n}
+    \end{split}
+\end{equation*} 
 \begin{equation}
     \label{res1}
     |\mu - \tau| = \Bigg|\frac{\sum_{i=1}^n (x_i - \tau)}{n}\Bigg| \le \frac{\sum_{i=1}^n |x_i - \tau|}{n}
 \end{equation}
-We also know that the median minimizes the total absolute loss.
-$$
+We also know that the median minimizes the total absolute deviation.
+\begin{equation*}
     \sum_{i=1}^n |x_i - \tau| \le \sum_{i=1}^n |x_i - y| \hspace{2em} \forall \ y 
-$$
+\end{equation*}
 Let $y = \mu$, thus we get:
-$$ 
-    \sum_{i=1}^n |x_i - \tau| \le \sum_{i=1}^n |x_i - \mu| 
-$$ 
-By (\ref{res1}), and the above result, we have:
-$$
+\begin{equation*}
+    \sum_{i=1}^n |x_i - \tau| \le \sum_{i=1}^n |x_i - \mu|
+\end{equation*}     
+By \eqref{res1}, and the above result, we have:
+\begin{equation}
+    \label{res2}
     |\mu - \tau| \le \frac{\sum_{i=1}^n |x_i - \tau|}{n} \le \frac{\sum_{i=1}^n |x_i - \mu|}{n}
-$$
+\end{equation}
 We also have:
-$$
-    \sigma = \sqrt{\frac{\sum_{i=1}^n (x_i - \mu)^2}{n-1}}
-$$
-TODO: Show R.H.S is less than equal to $\sigma$
+\begin{equation}
+    \label{res3}
+    \begin{split}
+        \sigma &= \sqrt{\frac{\sum_{i=1}^n (x_i - \mu)^2}{n-1}} \\
+            &> \sqrt{\frac{\sum_{i=1}^n (x_i - \mu)^2}{n}} \ge \frac{\sum_{i=1}^n |x_i - \mu|}{n} \hspace{2em} \\
+            &\text{(Root Mean Square $\ge$ Arithmetic Mean)}
+    \end{split}
+\end{equation}
+Therefore from \eqref{res2} and \eqref{res3}, we get that
+\begin{equation*}
+    |\mu - \tau| \le \sigma
+\end{equation*}
+% TODO: Show R.H.S is less than equal to $\sigma$
 
 
 
@@ -273,7 +287,7 @@ Thus, the defence lawyer can argue that there was only a $33\%$ chance that the 
         \hline
     \end{tabular}
 \end{center}
-\noindent
+
 \textbf{Quartile} method produced the best relative mean squared error.
 \subsection*{Explanation:}
 Let's choose an arbitrary window $W$ of length $w$ (in our case, $w$=17)
@@ -302,6 +316,64 @@ Even if a single value, anywhere in the data, gets corrupted, then mean will cha
 \newpage
 \section*{Question 7}
 \addcontentsline{toc}{section}{Question 7}
+
+\subsection*{Mean}
+Given $n$ values $\{x_i\}^n_{i=1}$ having mean $\mu$.\\
+Now we add $x_{n+1}$ to the set. Let the new mean be $\mu'$.
+\begin{equation*}
+    \begin{split}
+    \mu &= \frac{\sum_{i=1}^{n} x_i}{n} \\
+    \sum_{i=1}^{n} x_i &= n\mu \\
+    \sum_{i=1}^{n+1} x_i &= n\mu + x_{n+1} \\
+    \mu' &= \frac{\sum_{i=1}^{n+1} x_i}{n+1} \\
+        &= \frac{n\mu + x_{n+1}}{n+1} \\
+        &\approx \mu + \frac{x_{n+1}}{n} \hspace{2em} \text{(Given n is large)} \\
+    \end{split}
+\end{equation*}
+
+\subsection*{Median}
+Given sorted $n$ values $\{x_i\}^n_{i=1}$ having median $\tau$. \\
+Now we add $x'$ to the set. Let the new median be $\tau'$. \\
+
+For even $n$,
+\begin{center}
+$\tau = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2}$.\\
+$x' < x_{\frac{n}{2}} \implies \tau' = x_{\frac{n}{2}}$ \\
+$x_{\frac{n}{2}} < x' < x_{\frac{n}{2}+1} \implies \tau' = x'$ \\
+$x_{\frac{n}{2}+1} < x' \implies \tau' = x_{\frac{n}{2}+1}$ \\
+\end{center}
+
+For odd $n$,
+\begin{center}
+$\tau = x_{\frac{n+1}{2}}$ \\
+$x' < x_{\frac{n-1}{2}} \implies \tau' = \frac{x_{\frac{n-1}{2}} + x_{\frac{n+1}{2}}}{2}$ \\
+$x_{\frac{n-1}{2}} < x' < x_{\frac{n+1}{2}} \implies \tau' = \frac{x' + x_{\frac{n+1}{2}}}{2}$ \\
+$x_{\frac{n+1}{2}} < x' < x_{\frac{n+3}{2}} \implies \tau' = \frac{x_{\frac{n+1}{2}} + x'}{2}$ \\
+$x_{\frac{n+3}{2}} < x' \implies \tau' = \frac{x_{\frac{n+1}{2}} + x_{\frac{n+3}{2}}}{2}$
+\end{center}
+
+\subsection*{Standard Deviation}
+Given $n$ values $\{x_i\}^n_{i=1}$ having mean $\mu$ and standard deviation $\sigma$. \\
+Now we add $x_{n+1}$ to the set. Let the new mean $\mu'$ and new standard deviation $\sigma'$. \\
+\begin{equation*}
+    \begin{split}
+        \sigma^2 &= \frac{\sum_{i=1}^{n} (x_i - \mu)^2}{n-1} \\
+            &= \frac{\sum_{i=1}^{n} (x_i)^2 - 2\mu\sum_{i=1}^{n} (x_i) + n\mu^2 }{n-1} \\
+            &= \frac{\sum_{i=1}^{n} (x_i)^2 - 2\mu\cdot(n\mu) + n{\mu}^2}{n-1} \\
+            &= \frac{\sum_{i=1}^{n} (x_i)^2 - n{\mu}^2}{n-1} \\
+    \end{split}
+\end{equation*}
+\begin{equation*}
+    \begin{split}
+        \sum_{i=1}^{n} (x_i)^2 &= (n-1)\sigma^2 + n{\mu}^2 \\
+        \sum_{i=1}^{n+1} (x_i)^2 &= \sum_{i=1}^{n} (x_i)^2 + x_{n+1}^2 \\
+            &= (n-1)\sigma^2 + n{\mu}^2 + x_{n+1}^2 \\
+        \sigma'^2 &= \frac{\sum_{i=1}^{n+1} (x_i)^2 - n{\mu'}^2}{n} \\
+            &= \frac{(n-1)\sigma^2 + n{\mu}^2 + x_{n+1}^2 - n{\mu'}^2}{n} \\
+            &\approx \sigma^2 + \mu^2 - \mu'^2 + \frac{x_{n+1}^2}{n} \hspace{2em} \text{(Given n is large)} \\
+    \end{split}
+\end{equation*}
+
 
 \end{document}
 
