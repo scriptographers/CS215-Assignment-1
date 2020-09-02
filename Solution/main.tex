@@ -9,6 +9,9 @@
 \usepackage[left=0.75in, right=0.75in, bottom=0.75in]{geometry}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{chngcntr}
+\counterwithin*{equation}{section}
+\counterwithin*{equation}{subsection}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -28,9 +31,13 @@
 \maketitle
 \tableofcontents
 \thispagestyle{empty}
+\setcounter{page}{0}
 
-\newpage \setcounter{page}{1}
-\section{Question 1}
+
+
+\newpage
+\section*{Question 1}
+\addcontentsline{toc}{section}{Question 1}
 \begin{enumerate}[label=(\alph*)]
     \item The probability that the first person picks up his/her own book is $\frac{1}{n}$, for the second person, there are $n-1$ books remaining, thus the probability for him/her is $\frac{1}{n-1}$, similarly, the $i^{th}$ person has $ (n-i+1) $ choices, out of which $1$ is correct, thus $P(E_i)$, the probability that the $i^{th}$ person picks up his/her own book is given by: $\frac{1}{n-i+1}$.\\
           Thus, the probability that each person picks up his/her own book ($ \cap_{i=1}^{n} P(E_i) $) is given by:
@@ -57,8 +64,11 @@
 
 \end{enumerate}
 
+
+
 \newpage
-\section{Question 2}
+\section*{Question 2}
+\addcontentsline{toc}{section}{Question 2}
 By the definition of the variance\footnote{Note: Here $\sigma$ is defined to be the \textbf{positive} square root of the variance}, $\sigma^2$, we have:
 $$ \sigma^2 = \frac{\sum_{i=1}^n (x_i - \mu)^2}{n-1} $$
 \begin{equation}
@@ -82,16 +92,50 @@ Consider $k = \sqrt{n-1}$ in the above equation,\\
 $$ |S_{\sqrt{n-1}}| = \{ x_i : \  |x_i - \mu| \ge \sigma\sqrt{n-1} \} $$
 $$ \frac{|S_{\sqrt{n-1}}|}{n} < \frac{1}{n-1} $$
 $$ 0 \leq |S_{\sqrt{n-1}}| < \frac{n}{n-1}$$
+$$ \lim_{n\to\infty}0=0 \leq \lim_{n\to\infty}|S_{\sqrt{n-1}}| < \lim_{n\to\infty}\bigg( \frac{n}{n-1} \bigg)=1$$
+Thus,
+$$ \lim_{n\to\infty}|S_{\sqrt{n-1}}| = 0 $$
+The inequality proven earlier also says that $\forall i \ |x_i - \mu| \le \sigma \sqrt{n-1}$, i.e. $|S_{\sqrt{n-1}}| = 0$.\\
 
-``TODO: How does this inequality compare with Chebyshev's inequality as n increases?"\\
-The inequality proven above says that $\forall i \ |x_i - \mu| \le \sigma \sqrt{n-1}$, i.e. $|S_{\sqrt{n-1}}| = 0$.\\
-Applying limit $n \to \infty$ and Sandwich Theorem, $\lim_{n\to\infty} |S_{\sqrt{n-1}}| = 0$.
+
 
 \newpage
-\section{Question 3}
+\section*{Question 3}
+\addcontentsline{toc}{section}{Question 3}
+We have,
+$$ 
+    \mu = \frac{\sum_{i=1}^n x_i}{n}
+$$
+$$
+    \mu - \tau = \frac{\sum_{i=1}^n x_i}{n} - \tau = \frac{(\sum_{i=1}^nx_i) - n\tau}{n} = \frac{\sum_{i=1}^n (x_i - \tau)}{n}
+$$
+\begin{equation}
+    \label{res1}
+    |\mu - \tau| = \Bigg|\frac{\sum_{i=1}^n (x_i - \tau)}{n}\Bigg| \le \frac{\sum_{i=1}^n |x_i - \tau|}{n}
+\end{equation}
+We also know that the median minimizes the total absolute loss.
+$$
+    \sum_{i=1}^n |x_i - \tau| \le \sum_{i=1}^n |x_i - y| \hspace{2em} \forall \ y 
+$$
+Let $y = \mu$, thus we get:
+$$ 
+    \sum_{i=1}^n |x_i - \tau| \le \sum_{i=1}^n |x_i - \mu| 
+$$ 
+By (\ref{res1}), and the above result, we have:
+$$
+    |\mu - \tau| \le \frac{\sum_{i=1}^n |x_i - \tau|}{n} \le \frac{\sum_{i=1}^n |x_i - \mu|}{n}
+$$
+We also have:
+$$
+    \sigma = \sqrt{\frac{\sum_{i=1}^n (x_i - \mu)^2}{n-1}}
+$$
+TODO: Show R.H.S is less than equal to $\sigma$
+
+
 
 \newpage
-\section{Question 4}
+\section*{Question 4}
+\addcontentsline{toc}{section}{Question 4}
 Let $A$ be the event that the rickshaw is red.\\
 Thus, as a given rickshaw must be either red or blue, $A^c$ is the event that the rickshaw is blue.\\
 Let $B$ be the event that the rickshaw is observed as red by the person under the given conditions.\\
@@ -123,8 +167,11 @@ $$
 $$
 Thus, the defence lawyer can argue that there was only a $33\%$ chance that the rickshaw observed by the person XYZ was indeed red.
 
+
+
 \newpage
-\section{Question 5}
+\section*{Question 5}
+\addcontentsline{toc}{section}{Question 5}
 \begin{enumerate}[label=(\alph*)]
     \item
           Event of choosing a door is independent of which door contains the car as the contestant is unaware of the car's location. Therefore, $C_i$ and $Z_i$ are independent events.
@@ -163,23 +210,46 @@ Thus, the defence lawyer can argue that there was only a $33\%$ chance that the 
                   P(C_2|H_3, Z_1) &= \frac{P(H_3|C_2, Z_1) \cdot P(C_2, Z_1)}{P(H_3, Z_1)} \\
                   &= \frac{1 \cdot \frac{1}{9}}{\frac{1}{6}} \\
                   &= \frac{2}{3} \\
-                  &= \mathbf{66\%}
+                  &= \mathbf{67\%}
               \end{split}
           \end{align*}
 
     \item
           $P(H_3|C_3,Z_1) = 0 \implies P(C_3|H_3, Z_1)=0$ \hspace{1em} (Host is intelligent)\\
-          Therefore, $P(C_1|H_3, Z_1) = 1 - P(C_2|H_3, Z_1) = \frac{1}{3} = \mathbf{66\%}$
+          Therefore, $P(C_1|H_3, Z_1) = 1 - P(C_2|H_3, Z_1) = \frac{1}{3} = \mathbf{33\%}$
 
     \item
           $P(C_2|H_3, Z_1) > P(C_1|H_3, Z_1)$, i.e., the chances of winning the car is higher if the contestant switches his/her choice.
 
-    \item ``TODO: Not sure what is happening here.''
+    \item
+          Now, that the intelligence of the host is compromised.\\
+          If $(C_i, Z_1)$ happen for any i, then the host has equal chances of choosing Door 2 and Door 3, therefore,
+          \begin{align*}
+              P(H_1|C_i,Z_1) & = 0 & P(H_2|C_i,Z_1) & = \frac{1}{2} & P(H_3|C_i,Z_1) & = \frac{1}{2} \hspace{3em} \forall i \in {1, 2, 3}
+          \end{align*}
+          \begin{align*}
+              \begin{split}
+                  P(H_3, Z_1) &= P(H_3|C_1,Z_1) \cdot P(C_1,Z_1) + P(H_3|C_2,Z_1) \cdot P(C_2,Z_1) + P(H_3|C_2,Z_1) \cdot P(C_2,Z_1) \\
+                  &= \frac{1}{2} \cdot \frac{1}{9} + \frac{1}{2} \cdot \frac{1}{9} + \frac{1}{2} \cdot \frac{1}{9} \\
+                  &= \frac{1}{6}
+              \end{split} \\\\
+              \begin{split}
+                  P(C_2|H_3, Z_1) &= \frac{P(H_3|C_2, Z_1) \cdot P(C_2, Z_1)}{P(H_3, Z_1)} \\
+                  &= \frac{\frac{1}{2} \cdot \frac{1}{9}}{\frac{1}{6}} \\
+                  &= \frac{1}{3} \\
+              \end{split}
+          \end{align*}
+          Similarly, $P(C_1|H_3, Z_1) = P(C_3|H_3, Z_1) = \frac{1}{3}$\\
+          Now, if the Door 3 contains the car and it is shown to the contestant, then the contestant can simply choose that door (if allowed).\\
+          Else the contestant has equal probability to win a car with and without switching to Door 2.
 
 \end{enumerate}
 
+
+
 \newpage
-\section{Question 6}
+\section*{Question 6}
+\addcontentsline{toc}{section}{Question 6}
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.9]{q6.1.png}
@@ -206,13 +276,32 @@ Thus, the defence lawyer can argue that there was only a $33\%$ chance that the 
 \noindent
 \textbf{Quartile} method produced the best relative mean squared error.
 \subsection*{Explanation:}
+Let's choose an arbitrary window $W$ of length $w$ (in our case, $w$=17)
+$$ W := \{ x_1, x_2, \ldots, x_w \} $$
+Assume that the values in $W$ are sorted.\\
+Let the median be (approximately) at position $m$\\
+Let the first quartile be (approximately) at position $q$\\
+After corruption, let $n_c$ values out of these $w$ get corrupted.
 
+\medskip
+\textbf{Assumption:} After corruption, the values can only increase. (Note that this is true for our case as we are adding values in the range 100 to 120)\\
+\textbf{Case Q:}\\
+For quartile to change after corruption, \textbf{at least} $1$ value before $x_q$ must get corrupted (Let this be Event Q).\\
+\textbf{Case M:}\\
+For median to change after corruption, \textbf{at least} $1$ value before $x_m$ must get corrupted (Let this be Event M).\\
+\\
+As the amount of corruption increases, the probabilities of \textbf{both} these cases increase, but as $m > q$, the probability that Event M occurs is always more than the probability that Event Q occurs.\\
+Thus, the relative mean squared error is always smaller for quartile filtering as compared to median filtering.\\
 
+\medskip
+\textbf{For mean:}\\
+Even if a single value, anywhere in the data, gets corrupted, then mean will change drastically. Thus the relative mean squared error is always the highest for mean filtering as compared to quartile and median filtering.
 
 
 
 \newpage
-\section{Question 7}
+\section*{Question 7}
+\addcontentsline{toc}{section}{Question 7}
 
 \end{document}
 
