@@ -283,24 +283,26 @@ Thus, the defence lawyer can argue that there was only a $33\%$ chance that the 
 \addcontentsline{toc}{section}{Question 6}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.9]{q6.1.png}
+    \includegraphics[scale=0.8]{q6.1.png}
+    \caption{$30\%$ Corruption}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.9]{q6.2.png}
+    \includegraphics[scale=0.8]{q6.2.png}
+    \caption{$60\%$ Corruption}
 \end{figure}
 \begin{center}
     \begin{tabular}{|c|c|c|}
         \hline
         \textbf{Results} & \textbf{Mean Square Error (30\% Corruption)} & \textbf{Mean Square Error (60\% Corruption)} \\
         \hline
-        Corrupted        & 266.09                                       & 523.91                                       \\
+        Corrupted        & 303.82                                       & 614.77                                       \\
         \hline
-        Median           & 26.52                                        & 703.83                                       \\
+        Median           & 34.36                                        & 700.82                                       \\
         \hline
-        Mean             & 90.15                                        &  324.88                                       \\
+        Mean             & 105.33                                        &  395.31                                       \\
         \hline
-        Quartile         & 0.01                                         & 72.46                                      \\
+        Quartile         & 0.01                                         & 131.26                                      \\
         \hline
     \end{tabular}
 \end{center}
@@ -352,7 +354,7 @@ Now we add $x_{n+1}$ to the set. Let the new mean be $\mu'$.
     \sum_{i=1}^{n+1} x_i &= n\mu + x_{n+1} \\
     \mu' &= \frac{\sum_{i=1}^{n+1} x_i}{n+1} \\
         &= \frac{n\mu + x_{n+1}}{n+1} \\
-        &\approx \mu + \frac{x_{n+1}}{n} \hspace{2em} \text{(Given n is large)} \\
+        &\approx \mu + \frac{x_{n+1}}{n} \hspace{2em} \text{(Given n is very large)} \\
     \end{split}
 \end{equation*}
 
@@ -400,7 +402,7 @@ Thus the new standard deviation will be,
 $$
     \begin{aligned}
         \sigma' &= \sqrt{\frac{(n-1)\sigma^2 + n{\mu}^2 + x_{n+1}^2 - n{\mu'}^2}{n}}\\
-        &\approx \sqrt{\sigma^2 + \mu^2 - \mu'^2 + \frac{x_{n+1}^2}{n}} \hspace{2em} \text{(Given n is large)}
+        &\approx \sqrt{\sigma^2 + \mu^2 - \mu'^2 + \frac{x_{n+1}^2}{n}} \hspace{2em} \text{(Given n is very large)}
     \end{aligned}
 $$
 
