@@ -14,6 +14,11 @@
 \counterwithin*{equation}{section}
 \counterwithin*{equation}{subsection}
 
+\usepackage{sectsty}
+\sectionfont{\centering}
+
+\usepackage[perpage]{footmisc}
+
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -23,10 +28,19 @@
 \cfoot{Page \thepage}
 
 \setlength{\parindent}{0em}
+\renewcommand{\arraystretch}{2}%
 
 \title{Assignment 1: CS 215}
-\author{190100044 \& 190100055}
-\date{31st August 2020}
+\author{
+\begin{tabular}{|c|c|}
+     \hline
+     Devansh Jain & Harshit Varma \\
+     \hline
+     190100044 & 190100055 \\
+     \hline
+\end{tabular}
+}
+\date{September 3, 2020}
 
 \begin{document}
 
@@ -35,11 +49,10 @@
 \thispagestyle{empty}
 \setcounter{page}{0}
 
-
-
 \newpage
 \section*{Question 1}
 \addcontentsline{toc}{section}{Question 1}
+\setcounter{equation}{0}
 \begin{enumerate}[label=(\alph*)]
     \item The probability that the first person picks up his/her own book is $\frac{1}{n}$, for the second person, there are $n-1$ books remaining, thus the probability for him/her is $\frac{1}{n-1}$, similarly, the $i^{th}$ person has $ (n-i+1) $ choices, out of which $1$ is correct, thus $P(E_i)$, the probability that the $i^{th}$ person picks up his/her own book is given by: $\frac{1}{n-i+1}$.\\
           Thus, the probability that each person picks up his/her own book ($ \cap_{i=1}^{n} P(E_i) $) is given by:
@@ -70,6 +83,7 @@
 
 \newpage
 \section*{Question 2}
+\setcounter{equation}{0}
 \addcontentsline{toc}{section}{Question 2}
 By the definition of the variance\footnote{Note: Here $\sigma$ is defined to be the \textbf{positive} square root of the variance}, $\sigma^2$, we have:
 $$ \sigma^2 = \frac{\sum_{i=1}^n (x_i - \mu)^2}{n-1} $$
@@ -77,7 +91,7 @@ $$ \sigma^2 = \frac{\sum_{i=1}^n (x_i - \mu)^2}{n-1} $$
     \label{var}
     (n-1)\sigma^2 = \sum_{i=1}^n (x_i - \mu)^2
 \end{equation}
-Since $(x_i - \mu)^2 \ge 0 \  \forall \ i$, we have ((for all $i$)):
+Since $(x_i - \mu)^2 \ge 0 \  \forall \ i$, we have (for all $i$):
 $$ \sum_{i=1}^n (x_i - \mu)^2 \ge (x_i - \mu)^2  $$
 Thus, by (\ref{var}) we get (for all $i$):
 $$ (n-1)\sigma^2 \ge (x_i - \mu)^2 $$
@@ -103,6 +117,7 @@ The inequality proven earlier also says that $\forall i \ |x_i - \mu| \le \sigma
 
 \newpage
 \section*{Question 3}
+\setcounter{equation}{0}
 \addcontentsline{toc}{section}{Question 3}
 We have,
 \begin{equation*}
@@ -139,16 +154,15 @@ We also have:
             &\text{(Root Mean Square $\ge$ Arithmetic Mean)}
     \end{split}
 \end{equation}
-Therefore from \eqref{res2} and \eqref{res3}, we get that
+Therefore from \eqref{res2} and \eqref{res3}, we get that:
 \begin{equation*}
     |\mu - \tau| \le \sigma
 \end{equation*}
-% TODO: Show R.H.S is less than equal to $\sigma$
-
-
+\hfill \qedsymbol \\
 
 \newpage
 \section*{Question 4}
+\setcounter{equation}{0}
 \addcontentsline{toc}{section}{Question 4}
 Let $A$ be the event that the rickshaw is red.\\
 Thus, as a given rickshaw must be either red or blue, $A^c$ is the event that the rickshaw is blue.\\
@@ -176,15 +190,17 @@ $$
     \begin{aligned}
         P(A|B) & = \frac{P(B|A)P(A)}{P(B)}            \\
                & = \frac{0.99\times0.01}{0.0297}      \\
-               & = \frac{1}{3} = 0.33 = \mathbf{33\%}
+               & = \frac{1}{3} \approx 0.33 = \mathbf{33\%}
     \end{aligned}
 $$
-Thus, the defence lawyer can argue that there was only a $33\%$ chance that the rickshaw observed by the person XYZ was indeed red.
+Furthermore, as $P(A|B) + P(A^c|B) = 1$, we have: $$ P(A^c|B) = 1 - P(A|B) = \frac{2}{3} \approx 0.67 = \mathbf{67\%}$$
+Thus, the defence lawyer can argue that there was only a $33\%$ chance that the rickshaw observed by the person XYZ was indeed red, while there was a $67\%$ chance that the rickshaw observed by XYZ was actually blue, when XYZ observed it as red.\\
 
 
 
 \newpage
 \section*{Question 5}
+\setcounter{equation}{0}
 \addcontentsline{toc}{section}{Question 5}
 \begin{enumerate}[label=(\alph*)]
     \item
@@ -224,13 +240,13 @@ Thus, the defence lawyer can argue that there was only a $33\%$ chance that the 
                   P(C_2|H_3, Z_1) &= \frac{P(H_3|C_2, Z_1) \cdot P(C_2, Z_1)}{P(H_3, Z_1)} \\
                   &= \frac{1 \cdot \frac{1}{9}}{\frac{1}{6}} \\
                   &= \frac{2}{3} \\
-                  &= \mathbf{67\%}
+                  &\approx \mathbf{67\%}
               \end{split}
           \end{align*}
 
     \item
           $P(H_3|C_3,Z_1) = 0 \implies P(C_3|H_3, Z_1)=0$ \hspace{1em} (Host is intelligent)\\
-          Therefore, $P(C_1|H_3, Z_1) = 1 - P(C_2|H_3, Z_1) = \frac{1}{3} = \mathbf{33\%}$
+          Therefore, $P(C_1|H_3, Z_1) = 1 - P(C_2|H_3, Z_1) = \frac{1}{3} \approx \mathbf{33\%}$
 
     \item
           $P(C_2|H_3, Z_1) > P(C_1|H_3, Z_1)$, i.e., the chances of winning the car is higher if the contestant switches his/her choice.
@@ -263,6 +279,7 @@ Thus, the defence lawyer can argue that there was only a $33\%$ chance that the 
 
 \newpage
 \section*{Question 6}
+\setcounter{equation}{0}
 \addcontentsline{toc}{section}{Question 6}
 \begin{figure}[H]
     \centering
@@ -277,13 +294,13 @@ Thus, the defence lawyer can argue that there was only a $33\%$ chance that the 
         \hline
         \textbf{Results} & \textbf{Mean Square Error (30\% Corruption)} & \textbf{Mean Square Error (60\% Corruption)} \\
         \hline
-        Corrupted        & 266.09                                       & 588.35                                       \\
+        Corrupted        & 266.09                                       & 523.91                                       \\
         \hline
-        Median           & 26.52                                        & 372.31                                       \\
+        Median           & 26.52                                        & 703.83                                       \\
         \hline
-        Mean             & 90.15                                        & 737.09                                       \\
+        Mean             & 90.15                                        &  324.88                                       \\
         \hline
-        Quartile         & 0.01                                         & 117.38                                       \\
+        Quartile         & 0.01                                         & 72.46                                      \\
         \hline
     \end{tabular}
 \end{center}
@@ -298,11 +315,11 @@ Let the first quartile be (approximately) at position $q$\\
 After corruption, let $n_c$ values out of these $w$ get corrupted.
 
 \medskip
-\textbf{Assumption:} After corruption, the values can only increase. (Note that this is true for our case as we are adding values in the range 100 to 120)\\
+\textbf{Assumption:} (For the following reasoning) After corruption, the values can only increase. (Note that this is true for our case as we are adding values in the range 100 to 120)\\
 \textbf{Case Q:}\\
-For quartile to change after corruption, \textbf{at least} $1$ value before $x_q$ must get corrupted (Let this be Event Q).\\
+For quartile to change drastically after corruption, \textbf{at least} $1$ value before $x_q$ must get corrupted (Let this be Event Q).\\
 \textbf{Case M:}\\
-For median to change after corruption, \textbf{at least} $1$ value before $x_m$ must get corrupted (Let this be Event M).\\
+For median to change drastically after corruption, \textbf{at least} $1$ value before $x_m$ must get corrupted (Let this be Event M).\\
 \\
 As the amount of corruption increases, the probabilities of \textbf{both} these cases increase, but as $m > q$, the probability that Event M occurs is always more than the probability that Event Q occurs.\\
 Thus, the relative mean squared error is always smaller for quartile filtering as compared to median filtering.\\
@@ -310,11 +327,19 @@ Thus, the relative mean squared error is always smaller for quartile filtering a
 \medskip
 \textbf{For mean:}\\
 Even if a single value, anywhere in the data, gets corrupted, then mean will change drastically. Thus the relative mean squared error is always the highest for mean filtering as compared to quartile and median filtering.
+\\
+
+\textbf{Instructions for running the code:}
+\begin{enumerate}[noitemsep]
+    \item Find the folder named \texttt{code} after extracting the \texttt{.zip} file.
+    \item Open the file \texttt{q6.m} in \texttt{MATLAB} and find the variable \texttt{f} at line \texttt{12}. This controls the amount of corruption in the data. By default this is $0.3$ $(30\%)$, change this to whatever you want ($0 \le \texttt{f} \le 1$) and run the script. 
+\end{enumerate}
 
 
 
 \newpage
 \section*{Question 7}
+\setcounter{equation}{0}
 \addcontentsline{toc}{section}{Question 7}
 
 \subsection*{Mean}
@@ -369,10 +394,30 @@ Now we add $x_{n+1}$ to the set. Let the new mean $\mu'$ and new standard deviat
         \sum_{i=1}^{n+1} (x_i)^2 &= \sum_{i=1}^{n} (x_i)^2 + x_{n+1}^2 \\
             &= (n-1)\sigma^2 + n{\mu}^2 + x_{n+1}^2 \\
         \sigma'^2 &= \frac{\sum_{i=1}^{n+1} (x_i)^2 - n{\mu'}^2}{n} \\
-            &= \frac{(n-1)\sigma^2 + n{\mu}^2 + x_{n+1}^2 - n{\mu'}^2}{n} \\
-            &\approx \sigma^2 + \mu^2 - \mu'^2 + \frac{x_{n+1}^2}{n} \hspace{2em} \text{(Given n is large)} \\
     \end{split}
 \end{equation*}
+Thus the new standard deviation will be,
+$$
+    \begin{aligned}
+        \sigma' &= \sqrt{\frac{(n-1)\sigma^2 + n{\mu}^2 + x_{n+1}^2 - n{\mu'}^2}{n}}\\
+        &\approx \sqrt{\sigma^2 + \mu^2 - \mu'^2 + \frac{x_{n+1}^2}{n}} \hspace{2em} \text{(Given n is large)}
+    \end{aligned}
+$$
+
+\subsection*{Updating the Histogram}
+Let the bins of the old historgram be given by $[a_j, b_j)$ where $j = 1,2,\ldots,n_b$ ($n_b$ are the total number of bins)\\
+As $n$ is very large, adding a new sample point won't affect the required number of bins. Thus, we assume that the number of bins after adding the sample point remains the same i.e, equal to $n_b$.\\
+Let the new data value be $x_{new}$\\
+Loop through the bins and find a bin such that $x_{new}$ lies in that bin, i.e\\
+$$ a_j \le x_{new} < b_j \hspace{2em} \text{for some } j$$
+Then update the frequency of this bin by $1$.\\
+Thus, we get an updated histogram.\\ 
+
+\textbf{Instructions for running the code:}
+\begin{enumerate}[noitemsep]
+    \item Find the folder named \texttt{code} after extracting the \texttt{.zip} file.
+    \item Directory conatins files \texttt{UpdateMean.m}, \texttt{UpdateMedian.m} and \texttt{UpdateStd.m} with the definition of the functions \texttt{UpdateMean}, \texttt{UpdateMedian} and \texttt{UpdateStd} respectively. These can be accessed from the \texttt{MATLAB} terminal from within the directory.
+\end{enumerate}
 
 
 \end{document}
