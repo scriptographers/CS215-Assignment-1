@@ -9,12 +9,12 @@ plot(x, y, 'black');
 hold on;
 
 % Corrupted data:
-f = 0.6; % Fraction to be corrupted
+f = 0.3; % Fraction to be corrupted (Change this to the amount of corruption you need)
 z = y;
 n = length(z);
 n_corrupt = round(f*n);
 corrupt_indices = randperm(n, n_corrupt);
-z(corrupt_indices) = z(corrupt_indices) + (100 + 20*rand(1, n_corrupt));
+z(corrupt_indices) = z(corrupt_indices) + (100 + 20*rand(1,n_corrupt));
 
 plot(x, z, 'y');
 
@@ -52,5 +52,7 @@ legend("Original", "Corrupted", "Median", "Mean", "Quartile")
 ylabel("y");
 xlabel("x");
 title("Comparison between different types of filtering");
+
+
 
 
